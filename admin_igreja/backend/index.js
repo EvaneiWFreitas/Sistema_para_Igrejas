@@ -6,7 +6,7 @@ const conn = require("./db/conn");
 app.use(express.json());
 
 app.get("/", (req,res) => {
-    res.send("teste");
+    res.send("primeira requisição");
 });
 
 app.listen(5000, () => {
