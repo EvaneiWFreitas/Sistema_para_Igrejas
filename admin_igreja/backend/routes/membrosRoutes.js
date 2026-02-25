@@ -8,9 +8,16 @@ const Igreja = require('../models/Igreja');
 
 
 //******** MÉTODO PARA LISTAR  TODAS AS MEMBROS SALVAS *****//
-     //GET                   /**( READ ) */
+     //GET           /**( READ ) */
 /********************************************************* */
 
+router.get('/', async(req, res)=>{
+    const membrosList = await Membros.find().populate("igreja");
+    if(!membrosList){
+        res.status(500).json({success: false});
+    }
+    res.status(200).send(membrosList);
+});
 
 
 //*************** MÉTODO PARA SALVAR  MEMBROS *****************//
