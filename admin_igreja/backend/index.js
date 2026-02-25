@@ -27,7 +27,10 @@ app.use(bodyParser.json());
 app.use(morgan("tiny"));
 
 const igrejasRoutes = require("./routes/igrejasRoutes");
+const membrosRoutes = require("./routes/membrosRoutes");
+
 app.use(`${api}/igrejas`, igrejasRoutes);
+app.use(`${api}/membros`, membrosRoutes);
 
 app.listen(5000, () => {
     console.log("Servidor rodando na porta 5000");
