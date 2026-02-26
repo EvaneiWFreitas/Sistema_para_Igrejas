@@ -33,7 +33,6 @@ router.get("/:id", async(req, res)=>{
 
 
 
-
 //*************** MÉTODO PARA SALVAR OS  ESTUDOS BÍBLICOS **************//
     //POST             /**( CREATE) */
 /*********************************************************** */
@@ -51,9 +50,24 @@ router.post("/", async (req, res) => {
 
 });
 
+//** MÉTODO PARA FAZER ALTERAÇÕES NO REGISTRO DOS ESTUDOS *****//
+     //ROTA PUT- PARA ALTERAR ESTUDOS - /** ( UPDATE) */
+/************************************************************ */
 
-
-
+router.put("/:id", async(req, res)=>{
+    const estudo = await Estudo.findByIdAndUpdate(
+        req.params.id,
+        {
+            data: req.body.data,
+            assunto: req.body.assunto,
+            descricao: req.body.descricao,
+            notas: req.body.notas
+        },
+        {new: true}
+    );
+    if(!estudo) return res.status(400).send("O estudo não pode ser atualizado!");
+    res.send(estudo);
+});
 
 
 module.exports = router;
