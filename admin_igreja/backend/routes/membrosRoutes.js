@@ -60,10 +60,33 @@ router.post("/", async(req, res)=>{
 
 
 //** MÉTODO PARA FAZER ALTERAÇÕES NO REGISTRO DE MEMBROS *****//
-     //PUT                /**( UPDATE) */
+     //ROTA PUT- PARA ALTERAR MEMBROS - /** ( UPDATE) */
 /*********************************************************** */
 
+router.put("/:id", async(req, res) =>{
+    const igreja = await Igreja.findById(req.body.igreja);
+    if(!igreja) return res.status(404).send("Igreja Invalida!");
+    const membro = await Membros.findByIdAndUpdate(
+        req.params.id,
+        {
+            status: req.body.status,
+            funcao: req.body.funcao,
+            dataBatismo: req.body.dataBatismo,
+            adimissao: req.body.adimissao,
+            nome: req.body.nome,
+            genero: req.body.genero,
+            dataNasc: req.body.dataNasc,
+            endereco: req.body.endereco,
+            estado: req.body.estado,
+            ocupacao: req.body.ocupacao,
+            igreja:igreja,
+        },
+        {new: true}//AQUI O CÓDIGO RETORNA TODA INSTANCIA JÁ ALTERADA!
+    );
+    if(!membro) return res.status(400).send("O membro não pode ser atualizado!");
+    res.send(membro);
 
+});
 
 
 
