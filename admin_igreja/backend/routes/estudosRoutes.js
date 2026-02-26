@@ -18,7 +18,6 @@ router.get('/', async(req, res)=>{
    res.status(200).send(estudosList);
 });
 
-
 //********* MÉTODO PARA PEGAR REGISTRO DO ESTUDO BÍBLICO ***********//
     //ROTA GETBYID - PARA PEGAR UM ÚNICO REGISTRO
 /********************************************************* *********/
@@ -30,8 +29,6 @@ router.get("/:id", async(req, res)=>{
     }
     res.status(200).send(estudo);
 });
-
-
 
 //*************** MÉTODO PARA SALVAR OS  ESTUDOS BÍBLICOS **************//
     //POST             /**( CREATE) */
