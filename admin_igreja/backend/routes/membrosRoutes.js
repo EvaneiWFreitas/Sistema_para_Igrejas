@@ -8,7 +8,7 @@ const Igreja = require('../models/Igreja');
 
 
 //******** MÉTODO PARA LISTAR  TODAS AS MEMBROS SALVAS *****//
-     //GET           /**( READ ) */
+     //ROTA GET           /**( READ ) */
 /********************************************************* */
 
 router.get('/', async(req, res)=>{
@@ -20,8 +20,21 @@ router.get('/', async(req, res)=>{
 });
 
 
+//********* MÉTODO PARA PEGAR REGISTRO DE MEMBRO ***********//
+    //ROTA GETBYID - PARA PEGAR UM ÚNICO REGISTRO
+/********************************************************* */
+
+router.get("/:id", async(req, res)=>{
+    const membro = await Membros.findById(req.params.id).populate("igreja");
+    if(!membro){
+        res.status(404).json({message: "Membro com o id fornecido não encontrado."});
+    }
+    res.status(200).send(membro);
+});
+
+
 //*************** MÉTODO PARA SALVAR  MEMBROS *****************//
-    //POST                    /**( CREATE) */
+    //POST             /**( CREATE) */
 /*********************************************************** */
 router.post("/", async(req, res)=>{
     const igreja = await Igreja.findById(req.body.igreja);
@@ -44,5 +57,14 @@ router.post("/", async(req, res)=>{
     if(!membro) return res.status(400).send("O membro não pode ser criado.");
     res.send(membro);
 });
+
+
+//** MÉTODO PARA FAZER ALTERAÇÕES NO REGISTRO DE MEMBROS *****//
+     //PUT                /**( UPDATE) */
+/*********************************************************** */
+
+
+
+
 
 module.exports = router;
