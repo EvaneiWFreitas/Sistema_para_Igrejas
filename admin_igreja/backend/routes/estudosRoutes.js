@@ -19,6 +19,21 @@ router.get('/', async(req, res)=>{
 });
 
 
+//********* MÉTODO PARA PEGAR REGISTRO DO ESTUDO BÍBLICO ***********//
+    //ROTA GETBYID - PARA PEGAR UM ÚNICO REGISTRO
+/********************************************************* *********/
+
+router.get("/:id", async(req, res)=>{
+    const estudo = await Estudo.findById(req.params.id);
+    if(!estudo){
+        res.status(500).json({message: "O estudo com o id informado, não foi encontrado."});
+    }
+    res.status(200).send(estudo);
+});
+
+
+
+
 //*************** MÉTODO PARA SALVAR OS  ESTUDOS BÍBLICOS **************//
     //POST             /**( CREATE) */
 /*********************************************************** */
