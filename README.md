@@ -1,1 +1,1 @@
-Criação um sistema para Igrejas com MERN( MongoDB, Express React e Node.js)
+Criação um sistema para Igrejas com: ( MongoDB, Express React e Node.js)
