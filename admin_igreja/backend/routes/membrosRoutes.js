@@ -89,5 +89,26 @@ router.put("/:id", async(req, res) =>{
 });
 
 
+//******* MÉTODO PARA EXCLUIR OS REGISTROS DO MEMBRO *********//
+                     /**( DELETE ) */
+/*********************************************************** */
+router.delete("/:id", (req, res) => {
+    Membros.findByIdAndDelete(req.params.id)
+    .then(membro => {
+        if (membro) {
+            return res
+                .status(200)
+                .json({ success: true, message: "Membro excluído com sucesso!" });
+        } else {
+            return res
+                .status(404)
+                .json({ success: false, message: "Membro não encontrado!" });
+        }
+    })
+    .catch((err) => {
+        return res.status(500).json({ success: false, error: err });
+    });
+});
+
 
 module.exports = router;
