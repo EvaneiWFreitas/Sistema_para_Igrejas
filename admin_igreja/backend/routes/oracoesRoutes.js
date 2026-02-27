@@ -4,6 +4,18 @@ const router = express.Router();
 
 const Oracao = require("../models/Oracao");
 
+//******* MÉTODO PARA LISTAR AS ORAÇÕES CADASTRADOS ********//
+     //ROTA GET           /**( READ ) */
+/********************************************************* */
+
+router.get('/', async(req, res)=>{
+   const oracoesList = await Oracao.find();
+   if(!oracoesList){
+        res.status(500).json({success: false});
+   }
+   res.status(200).send(oracoesList);
+});
+
 
 //*************** MÉTODO PARA SALVAR AS ORAÇÕES **************//
     //POST             /**( CREATE) */
