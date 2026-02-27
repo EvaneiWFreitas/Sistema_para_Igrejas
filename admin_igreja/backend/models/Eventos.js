@@ -1,4 +1,4 @@
-/** BACKEND PA EVENTOS DA IGREJA */
+/** BACKEND PARA EVENTOS DA IGREJA */
 
 const mongoose = require("mongoose");
 
