@@ -16,6 +16,18 @@ router.get('/', async(req, res)=>{
    res.status(200).send(oracoesList);
 });
 
+//********* MÉTODO PARA PEGAR REGISTRO DAS ORAÇÕES ***********//
+    //ROTA GETBYID - PARA PEGAR UM ÚNICO REGISTRO
+/********************************************************* ***/
+
+router.get("/:id", async(req, res)=>{
+    const oracoes = await Oracao.findById(req.params.id);
+    if(!oracoes){
+        res.status(500).json({message: "A oração com o id informado, não foi encontrado."});
+    }
+    res.status(200).send(oracoes);
+});
+
 
 //*************** MÉTODO PARA SALVAR AS ORAÇÕES **************//
     //POST             /**( CREATE) */
