@@ -67,6 +67,28 @@ router.post("/", async (req, res) => {
 
 });
 
+//******* MÉTODO PARA EXCLUIR OS REGISTROS DOS EVENTOS ********//
+     //DELETE                /**( DELETE ) */
+/************************************************************ */
+
+router.delete("/:id", (req, res) => {
+     Eventos.findByIdAndDelete(req.params.id)
+        .then(eventos => {
+            if (eventos) {
+                return res
+                    .status(200)
+                    .json({ success: true, message: "Evento excluído com sucesso!" });
+            } else {
+                return res
+                    .status(404)
+                    .json({ success: false, message: "Evento não encontrado!" });
+            }
+        })
+        .catch((err) => {
+            return res.status(500).json({ success: false, error: err });
+        });
+});
+
 
 
 module.exports = router;
