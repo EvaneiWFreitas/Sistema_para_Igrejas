@@ -65,4 +65,27 @@ router.put("/:id", async(req, res)=>{
     res.send(oracoes);
 });
 
+//******* MÉTODO PARA EXCLUIR OS REGISTROS DO ESTUDO *********//
+                     /**( DELETE ) */
+/************************************************************ */
+
+router.delete("/:id", (req, res) => {
+     Oracao.findByIdAndDelete(req.params.id)
+        .then(oracoes => {
+            if (oracoes) {
+                return res
+                    .status(200)
+                    .json({ success: true, message: "Oração excluída com sucesso!" });
+            } else {
+                return res
+                    .status(404)
+                    .json({ success: false, message: " Oração não encontrada!" });
+            }
+        })
+        .catch((err) => {
+            return res.status(500).json({ success: false, error: err });
+        });
+});
+
+
 module.exports = router;
