@@ -46,4 +46,23 @@ router.post("/", async (req, res) => {
 
 });
 
+//** MÉTODO PARA FAZER ALTERAÇÕES NO REGISTRO DAS ORAÇÕES *****//
+     //ROTA PUT- PARA ALTERAR ESTUDOS - /** ( UPDATE) */
+/************************************************************* */
+
+router.put("/:id", async(req, res)=>{
+    const oracoes = await Oracao.findByIdAndUpdate(
+        req.params.id,
+        {
+            motivo: req.body.motivo,
+            descricao: req.body.descricao,
+            prioridade: req.body.prioridade,
+            estatus: req.body.estatus
+        },
+        {new: true}
+    );
+    if(!oracoes) return res.status(400).send("A oração não pode ser atualizado!");
+    res.send(oracoes);
+});
+
 module.exports = router;
