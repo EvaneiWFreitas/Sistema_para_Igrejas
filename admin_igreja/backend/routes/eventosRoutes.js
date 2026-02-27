@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const eventos = require("../models/Eventos");
+const Eventos = require("../models/Eventos");
 
 //******* MÉTODO PARA LISTAR OS EVENTOS DA IGREJA *************//
     //GET             /**( CREATE) */
@@ -13,6 +14,19 @@ router.get("/", async(req, res)=>{
 
     }
     res.status(200).send(eventosList);
+});
+
+
+//********* MÉTODO PARA PEGAR REGISTRO DO EVENTO BÍBLICO ***********//
+    //ROTA GETBYID - PARA PEGAR UM ÚNICO REGISTRO
+/********************************************************* *********/
+
+router.get("/:id", async(req, res)=>{
+    const evento = await Eventos.findById(req.params.id);
+    if(!evento){
+        res.status(500).json({message: "O evento com o id informado, não foi encontrado."});
+    }
+    res.status(200).send(evento);
 });
 
 
