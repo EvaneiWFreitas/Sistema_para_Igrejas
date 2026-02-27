@@ -17,7 +17,7 @@ router.get("/", async(req, res)=>{
 });
 
 
-//********* MÉTODO PARA PEGAR REGISTRO DO EVENTO BÍBLICO ***********//
+//********* MÉTODO PARA PEGAR REGISTRO DO EVENTO ******************//
     //ROTA GETBYID - PARA PEGAR UM ÚNICO REGISTRO
 /********************************************************* *********/
 
@@ -27,6 +27,26 @@ router.get("/:id", async(req, res)=>{
         res.status(500).json({message: "O evento com o id informado, não foi encontrado."});
     }
     res.status(200).send(evento);
+});
+
+
+//** MÉTODO PARA FAZER ALTERAÇÕES NO REGISTRO DOS ESTUDOS *****//
+     //ROTA PUT- PARA ALTERAR ESTUDOS - /** ( UPDATE) */
+/************************************************************ */
+
+router.put("/:id", async(req, res)=>{
+    const evento = await Eventos.findByIdAndUpdate(
+        req.params.id,
+        {
+            nome: req.body.nome,
+            descricao: req.body.descricao,
+            inicio: req.body.inicio,
+            termino: req.body.termino
+        },
+        {new: true}
+    );
+    if(!evento) return res.status(400).send("O evento não pode ser atualizado!");
+    res.send(evento);
 });
 
 
