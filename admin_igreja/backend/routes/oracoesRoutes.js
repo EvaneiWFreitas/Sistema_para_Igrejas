@@ -66,7 +66,7 @@ router.put("/:id", async(req, res)=>{
 });
 
 //******* MÉTODO PARA EXCLUIR OS REGISTROS DO ESTUDO *********//
-                     /**( DELETE ) */
+       //DELETE              /**( DELETE ) */
 /************************************************************ */
 
 router.delete("/:id", (req, res) => {
