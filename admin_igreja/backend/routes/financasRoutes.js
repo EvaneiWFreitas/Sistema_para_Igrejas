@@ -46,5 +46,27 @@ router.post("/", async (req, res) => {
 
 });
 
+//** MÉTODO PARA FAZER ALTERAÇÕES NO REGISTRO DAS FINANÇAS *****//
+     //ROTA PUT- PARA ALTERAR FINANÇAS - /** ( UPDATE) */
+/************************************************************* */
+
+router.put("/:id", async(req, res)=>{
+    const financas = await Financas.findByIdAndUpdate(
+        req.params.id,
+        {
+            tipo: req.body.tipo,
+            descricao: req.body.descricao,
+            quantia: req.body.quantia,
+            data: req.body.data,
+            metodoPagamento: req.body.metodoPagamento,
+        },
+        {new: true}
+    );
+    if(!financas) return res.status(400).send("A finaça não pode ser atualizado!");
+    res.send(financas);
+});
+
+
+
 
 module.exports = router;
