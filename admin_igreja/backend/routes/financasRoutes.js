@@ -66,6 +66,28 @@ router.put("/:id", async(req, res)=>{
     res.send(financas);
 });
 
+//******* MÉTODO PARA EXCLUIR OS REGISTROS DAS FINANÇAS *********//
+       //DELETE              /**( DELETE ) */
+/************************************************************** */
+
+router.delete("/:id", (req, res) => {
+     Financas.findByIdAndDelete(req.params.id)
+        .then(financas => {
+            if (financas) {
+                return res
+                    .status(200)
+                    .json({ success: true, message: "Finanças excluída com sucesso!" });
+            } else {
+                return res
+                    .status(404)
+                    .json({ success: false, message: " Finanças não encontrada!" });
+            }
+        })
+        .catch((err) => {
+            return res.status(500).json({ success: false, error: err });
+        });
+});
+
 
 
 
