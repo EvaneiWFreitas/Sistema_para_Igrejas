@@ -1,6 +1,31 @@
 const express = require("express");
 const router = express.Router();
 
+//******* MÉTODO PARA LISTAR AS FINANÇAS CADASTRADOS ********//
+     //ROTA GET           /**( READ ) */
+/********************************************************* */
+
+router.get('/', async(req, res)=>{
+   const financasList = await Financas.find();
+   if(!financasList){
+        res.status(500).json({success: false});
+   }
+   res.status(200).send(financasList);
+});
+
+//********* MÉTODO PARA PEGAR REGISTRO DAS FINANÇAS ***********//
+    //ROTA GETBYID - PARA PEGAR UM ÚNICO REGISTRO
+/********************************************************* *****/
+
+router.get("/:id", async(req, res)=>{
+    const finacas = await Financas.findById(req.params.id);
+    if(!finacas){
+        res.status(500).json({message: "A finança com o id informado, não foi encontrado."});
+    }
+    res.status(200).send(finacas);
+});
+
+
 //*************** MÉTODO PARA SALVAR AS ORAÇÕES **************//
     //POST             /**( CREATE) */
 /*********************************************************** */
