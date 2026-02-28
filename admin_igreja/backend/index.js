@@ -31,12 +31,14 @@ const membrosRoutes = require("./routes/membrosRoutes");
 const estudosRoutes = require("./routes/estudosRoutes");
 const eventosRoutes = require("./routes/eventosRoutes");
 const oracoesRoutes = require("./routes/oracoesRoutes");
+const financasRoutes = require("./routes/financasRoutes");
 
 app.use(`${api}/igrejas`, igrejasRoutes);
 app.use(`${api}/membros`, membrosRoutes);
 app.use(`${api}/estudos`, estudosRoutes);
 app.use(`${api}/eventos`, eventosRoutes);
 app.use(`${api}/oracoes`, oracoesRoutes);
+app.use(`${api}/financas`, financasRoutes);
 
 app.listen(5000, () => {
     console.log("Servidor rodando na porta 5000");
