@@ -1,13 +1,15 @@
 
 import './App.css'
-import HelloWorld from './HelloWorld'
+import ListIgrejasComponent from './components/Igrejas/ListIgrejasComponent'
 
 function App() {
 
   return (
     <>
-      <h1>Curso Sistema para Igreja.</h1>
-      <HelloWorld/>
+      <h1 className="">Tela Principal</h1>
+      {/** Componente -> <ListIgrejasComponent/> */}
+      <ListIgrejasComponent/>
+      
     </>
   )
 }
