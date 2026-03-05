@@ -30,11 +30,13 @@ const churchesRoutes = require("./routes/churchesRoutes");
 const membersRoutes = require("./routes/membersRoutes");
 const studiesRoutes = require("./routes/studiesRoutes");
 const occasionsRoutes = require("./routes/occasionsRoutes");
+const payersRoutes = require("./routes/playersRoutes");
 
 app.use(`${api}/churches`, churchesRoutes);
 app.use(`${api}/members` , membersRoutes);
 app.use(`${api}/studies`, studiesRoutes);
 app.use(`${api}/occasions`, occasionsRoutes);
+app.use(`${api}/players`, payersRoutes)
 
 
 app.listen(5000, () => {
