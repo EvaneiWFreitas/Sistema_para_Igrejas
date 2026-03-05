@@ -18,7 +18,6 @@ router.get('/', async (req, res) => {
     res.status(200).send(memberList);
 });
 
-
 //******** MÉTODO PARA LISTAR UM ÚNICO MEMBRO SALVO *****//
     //GETBYID CONSULTAR UM ÚNICO MEMBROS /**( READ ) */
     //Tras os Membros e a Igreja que ele pertence.
@@ -32,7 +31,6 @@ router.get("/:id", async (req, res) => {
     }
 
 });
-
 
 //*************** MÉTODO PARA SALVAR  MEMBROS *****************//
     //POST SALVAR MEMBROS   /**( CREATE) */
@@ -82,31 +80,25 @@ router.put("/:id", async (req, res) => {
                 occupation: req.body.occupation,
                 church:church,
             },
-            {new:true}
+            {new:true}//Retorna uma nova instância já alterada pelo sistema
         );
         if(!member){
             return res.status(400).send("O Membro não pode ser atualizado.");
         }else{
-            res.send(member);
+            res.send(member);//Se existir o membro, retornará o membro já alterado
         }
     
 });
 
-
-//******* MÉTODO PARA EXCLUIR OS REGISTROS DO MEMBRO *********//
+//******* MÉTODO PARA EXCLUIR O REGISTRO DO MEMBRO *********//
      //DELETE - EXCLUIR   /**( DELETE ) */
 /*********************************************************** */
 router.delete("/:id", (req,res)=>{
-    Member.findByIdAndDelete(req.params.id)
-    .then(member=>{
+    Member.findByIdAndDelete(req.params.id).then(member=>{
         if(member){
-            return res
-            .status(200)
-            .json({success: true, message: "O Membro foi excluido!"});
+            return res.status(200).json({success: true, message: "O Membro foi excluido!"});
         }else{
-            return res
-            .status(404)
-            .json({success: false, message: "O Membro não foi encontrado!"});
+            return res.status(404).json({success: false, message: "O Membro não foi encontrado!"});
         }   
     })
     .catch((err)=>{
