@@ -27,9 +27,10 @@ app.use(bodyParser.json());
 app.use(morgan("tiny"));
 
 const churchesRoutes = require("./routes/churchesRoutes");
-
+const membersRoutes = require("./routes/membersRoutes");
 
 app.use(`${api}/churches`, churchesRoutes);
+app.use(`${api}/members` , membersRoutes);
 
 
 app.listen(5000, () => {
