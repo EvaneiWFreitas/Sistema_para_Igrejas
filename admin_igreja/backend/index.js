@@ -31,12 +31,14 @@ const membersRoutes = require("./routes/membersRoutes");
 const studiesRoutes = require("./routes/studiesRoutes");
 const occasionsRoutes = require("./routes/occasionsRoutes");
 const payersRoutes = require("./routes/playersRoutes");
+const financialRoutes = require("./routes/financialRoutes");
 
 app.use(`${api}/churches`, churchesRoutes);
 app.use(`${api}/members` , membersRoutes);
 app.use(`${api}/studies`, studiesRoutes);
 app.use(`${api}/occasions`, occasionsRoutes);
-app.use(`${api}/players`, payersRoutes)
+app.use(`${api}/players`, payersRoutes);
+app.use(`${api}/financial`, financialRoutes);
 
 
 app.listen(5000, () => {
