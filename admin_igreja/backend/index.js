@@ -29,10 +29,12 @@ app.use(morgan("tiny"));
 const churchesRoutes = require("./routes/churchesRoutes");
 const membersRoutes = require("./routes/membersRoutes");
 const studiesRoutes = require("./routes/studiesRoutes");
+const occasionsRoutes = require("./routes/occasionsRoutes");
 
 app.use(`${api}/churches`, churchesRoutes);
 app.use(`${api}/members` , membersRoutes);
 app.use(`${api}/studies`, studiesRoutes);
+app.use(`${api}/occasions`, occasionsRoutes);
 
 
 app.listen(5000, () => {
