@@ -4,7 +4,7 @@ const router = express.Router();
 
 const mongoose = require("mongoose");
 
-const Igreja = require("../models/Igreja");
+const Church = require("../models/Church");
 
 
 //******** MÉTODO PARA LISTAR  TODAS AS IGREJAS SALVAS *****//
@@ -12,23 +12,23 @@ const Igreja = require("../models/Igreja");
 /********************************************************* */
 
 router.get('/', async (req, res) => {
-    //res.status(200).send("Chegou na Igreja");
-    const igrejasList = await Igreja.find();
-    if(!igrejasList){
+    {/*res.status(200).send("Chegou na Igreja");*/}
+    const churchList = await Church.find();
+    if(!churchList){
         res.status(500).json({success: false});
     }
-    res.status(200).send(igrejasList);
+    res.status(200).send(churchList);
 });
 
 //************** MÉTODO PARA EDITAR A IGREJA ***************//
 /********************************************************* */
 
 router.get("/:id", async(req,res)=>{
-    const igreja = await Igreja.findById(req.params.id);
-    if(!igreja){
+    const churches = await Church.findById(req.params.id);
+    if(!churches){
         res.status(500).json({message:"Não foi encontrada nenhuma Igreja neste id!"});
     }
-    res.status(200).send(igreja);
+    res.status(200).send(churches);
 });
 
 //*************** MÉTODO PARA SALVAR  IGREJA *****************//
@@ -36,23 +36,22 @@ router.get("/:id", async(req,res)=>{
 /*********************************************************** */
 
 router.post("/", async(req, res) => {
-    let igreja = new Igreja({
+    let churches = new Church({
         name: req.body.name,
         responsible: req.body.responsible,
         website: req.body.website,
         type: req.body.type,
-        fundationdate: req.body.fundationdate,
+        foundationdate: req.body.foundationdate,
         cnpj: req.body.cnpj,
         address: req.body.address,
         city: req.body.city,
-        bairro:req.body.bairro,
-        estado:req.body.estado,
+        state:req.body.state,
         phone: req.body.phone,
     });
 
-    igreja = await igreja.save();
-    if(!igreja) return res.status(400).send("Igreja não pode ser salva!");
-    res.send(igreja);
+    churches = await churches.save();
+    if(!churches) return res.status(400).send("Igreja não pode ser salva!");
+    res.send(churches);
 
 
 });
@@ -62,27 +61,26 @@ router.post("/", async(req, res) => {
 /*********************************************************** */
 
 router.put("/:id", async(req,res)=>{
-    const igreja = await Igreja.findByIdAndUpdate(
+    const churches = await Church.findByIdAndUpdate(
         req.params.id,
         {
             name: req.body.name,
             responsible: req.body.responsible,
             website: req.body.website,
             type: req.body.type,
-            fundationdate: req.body.fundationdate,
+            foundationdate: req.body.foundationdate,
             cnpj: req.body.cnpj,
             address: req.body.address,
             city: req.body.city,
-            bairro:req.body.bairro,
-            estado:req.body.estado,
+            state:req.body.state,
             phone: req.body.phone,
         },
         {new: true}
 
     );
 
-        if(!igreja) return res.status(400).send("A Igreja não pode ser atualizada!");
-        res.send(igreja);
+        if(!churches) return res.status(400).send("A Igreja não pode ser atualizada!");
+        res.send(churches);
 
 });
 
@@ -91,9 +89,9 @@ router.put("/:id", async(req,res)=>{
                      /**( DELETE ) */
 /*********************************************************** */
 router.delete("/:id", (req,res)=>{
-    Igreja.findByIdAndDelete(req.params.id)
-    .then(igreja=>{
-        if(igreja){
+    Church.findByIdAndDelete(req.params.id)
+    .then(church=>{
+        if(church){
             return res
             .status(200)
             .json({success: true, message: "A Igreja foi excluida!"});
