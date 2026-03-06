@@ -10,8 +10,10 @@ const churchSchema = new mongoose.Schema({
     cnpj:{type: String, required: true},
     address:{type:String, required:true}, //ENDEREÇO
     city:{type:String, required:true}, //CIDADE
+    bairro: {type: String, required:true},
     state:{type:String, required:true},  
     phone:{type:String, required:true}, //TELEFONE
+    email:{type:String, required:true}, 
 
 });
 

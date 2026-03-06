@@ -45,8 +45,10 @@ router.post("/", async(req, res) => {
         cnpj: req.body.cnpj,
         address: req.body.address,
         city: req.body.city,
+        bairro: req.body.bairro,
         state:req.body.state,
         phone: req.body.phone,
+        email: req.body.email,
     });
 
     churches = await churches.save();
@@ -72,8 +74,10 @@ router.put("/:id", async(req,res)=>{
             cnpj: req.body.cnpj,
             address: req.body.address,
             city: req.body.city,
+            bairro: req.body.bairro,
             state:req.body.state,
             phone: req.body.phone,
+            email: req.body.email,
         },
         {new: true}
 
