@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { getAllChurches } from '../../services/ChurchService';
+import { useNavigate } from 'react-router-dom';
 
 const ListChurchComponent = () => {
 
     const [churches, setChurches] = useState([]);
+
+    const navigator = useNavigate([]);
 
     function listofChurches(){
         getAllChurches().then((response)=>{
@@ -18,11 +21,19 @@ const ListChurchComponent = () => {
         listofChurches();
     },[]);
 
+    //FUNÇÃO PARA ADICIONAR UMA NOVA IGREJA(function addNewChurch())
+    function addNewChurch(){
+        navigator("/add-churches");
+    }
+
   return (
     <div className="container">
         <br></br>
         <h2 className="text-center text-success">Lista das Igrejas</h2>
         <br />
+        <button className="btn btn-success" onClick={addNewChurch}>
+          Cadastrar Igreja
+        </button>
         <table className="table table-striped">
             <thead>
                 <tr>
