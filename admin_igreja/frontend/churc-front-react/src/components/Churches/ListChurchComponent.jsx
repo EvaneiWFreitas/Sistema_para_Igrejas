@@ -20,6 +20,7 @@ const ListChurchComponent = () => {
 
   return (
     <div className="container">
+        <br></br>
         <h2 className="text-center text-success">Lista das Igrejas</h2>
         <br />
         <table className="table table-striped">
