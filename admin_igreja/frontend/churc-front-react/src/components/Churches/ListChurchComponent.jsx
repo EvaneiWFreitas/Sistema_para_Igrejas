@@ -29,7 +29,7 @@ const ListChurchComponent = () => {
   return (
     <div className="container">
         <br></br>
-        <h2 className="text-center text-success">Lista das Igrejas</h2>
+        <h2 className="text-center text-success">Igrejas Cadastradas:</h2>
         <br />
         <button className="btn btn-success" onClick={addNewChurch}>
           Cadastrar Igreja
