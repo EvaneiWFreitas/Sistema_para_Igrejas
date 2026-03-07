@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { createChurch } from '../../services/ChurchService';
 
 
 
@@ -18,6 +20,8 @@ const ChurchComponent = () => {
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
 
+    const navigator = useNavigate();
+
     function saveChurch(e){
         e.preventDefault();
 
@@ -35,8 +39,14 @@ const ChurchComponent = () => {
             phone,
             email,
         };
-         console.log(church);
-
+         //console.log(church);
+         createChurch(church).then((response)=>{
+            console.log(response.data);
+            navigator("/churches");
+         })
+         .catch((error)=>{
+            console.error(error);
+         })
     }
 
   return (
@@ -63,6 +73,7 @@ const ChurchComponent = () => {
                         <div className='form-group mb-2'>
                             <label className='form-label'>Tipo:</label>
                             <select value={type} onChange={(e)=>setType(e.target.value)} className='form-control'>
+                            <option value="Igreja"></option>
                             <option value="Igreja">Igreja</option>
                             <option value="Congregacao">Congregação</option>
                             <option value="PontoPregacao">Ponto de Pregação</option>
