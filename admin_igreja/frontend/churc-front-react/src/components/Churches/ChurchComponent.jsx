@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { createChurch } from '../../services/ChurchService';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+import { createChurch, getChurchById, updatChurch } from '../../services/ChurchService';
 
 
 
@@ -21,6 +21,36 @@ const ChurchComponent = () => {
     const [email, setEmail] = useState("");
 
     const navigator = useNavigate();
+    const {id} = useParams();
+
+
+
+    useEffect(() => {
+        if(id){
+            getChurchById(id)
+            .then((response) => {
+                console.log(response.data);
+                setName(response.data.name);
+                setResponsible(response.data.responsible);
+                setWebsite(response.data.website);
+                setType(response.data.type);
+                setFoundationdate(response.data.foundationdate.split("T")[0]);
+                setCnpj(response.data.cnpj);
+                setAddress(response.data.address);
+                setCity(response.data.city);
+                setBairro(response.data.bairro);
+                setState(response.data.state);
+                setPhone(response.data.phone);
+                setEmail(response.data.email);
+
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        }
+    },[id]);
+
+
 
     //VALIDAÇÃO DOS CAMPOS
     const[errors, setErrors] = useState({
@@ -37,6 +67,8 @@ const ChurchComponent = () => {
             phone: "",
             email: "",
     });
+
+    
 
     //CRIANDO A FUNÇÃO DE VALIDAÇÃO
     function validateForm(){
@@ -131,8 +163,18 @@ const ChurchComponent = () => {
         return valid;
     }
 
+
+    //FUNÇÃO RESPONSÁVEL PELA MUDANÇA DO TITULO DA PÁGINA
+    function pageTitle(){
+        if(id){
+            return <h2 className='text-center text-success'>Editar Igreja</h2>
+        }else{
+            return <h2 className='text-center text-success'>Adicionar Igreja</h2>
+        }
+    }
+
     //FUNÇÃO SALVAR A IGREJA
-    function saveChurch(e){
+    function saveOrUpdateChurch(e){
         e.preventDefault();
         if(validateForm()){
             const church = {
@@ -150,15 +192,31 @@ const ChurchComponent = () => {
                 email,
             };
             //console.log(church);
-            createChurch(church).then((response)=>{
+
+            /**
+             * if =   Se existir o id ele irá atualizar uma igreja já existente.
+             * else = se não existir o id le ira salvar uma nova igreja.
+             */
+            if(id){
+                updatChurch(id, church)
+                   .then((response) =>{
+                    console.log(response.data);
+                    navigator("/churches")
+                })
+                .catch((error) =>{
+                    console.error(error);
+                })
+                
+            }else{
+                createChurch(church).then((response)=>{
                 console.log(response.data);
                 //navigator("/churches")chama a página Listar Igrejas quando os dados da igreja são salvos.
                 navigator("/churches");
-            })
-            .catch((error)=>{
-                console.error(error);
-            });
-
+                })
+                .catch((error)=>{
+                    console.error(error);
+                });
+            }
         }
     }
 
@@ -168,7 +226,7 @@ const ChurchComponent = () => {
         <div className='row'>
             <div className='card col-md-10 offset-md-1 offset-md-1'>
                 <br/>
-                <h2 className='text-center text-success'>Adicionar Igreja</h2>
+                {pageTitle()}
                 <div className='card-body'>
                     <form>
                         <div className='form-group mb-2'>
@@ -207,7 +265,7 @@ const ChurchComponent = () => {
                         <div className='form-group mb-2'>
                             <label className='form-label'>Tipo:</label>
                             <select value={type} onChange={(e)=>setType(e.target.value)} className={`form-control ${errors.type ? "is-invalid":""}`} >
-                            <option>Escolha um tipo para igreja:</option>
+                            <option>Escolha o tipo de Igreja</option>
                             <option value="Igreja Filial">Igreja Filial</option>
                             <option value="Congregacao">Congregação</option>
                             <option value="Ponto Pregacao">Ponto de Pregação</option>
@@ -335,7 +393,7 @@ const ChurchComponent = () => {
                             <div className='invalid-feedback'>{errors.email}</div>
                             )}
                         </div>
-                        <button className='btn btn-success' onClick={saveChurch}>
+                        <button className='btn btn-success' onClick={saveOrUpdateChurch}>
                             Salvar Igreja
                         </button>
                     </form>

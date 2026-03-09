@@ -26,10 +26,16 @@ const ListChurchComponent = () => {
         navigator("/add-churches");
     }
 
+    //FUNÇÃO PARA EDITAR IGREJA(function updatChurch() )
+    function updateChurch(id){
+        navigator(`/edit-church/${id}`);
+    }
+
+
   return (
     <div className="container">
         <br></br>
-        <h2 className="text-center text-success">Igrejas Cadastradas:</h2>
+        <h2 className="text-center text-success">Listar Igrejas Cadastradas:</h2>
         <br />
         <button className="btn btn-success" onClick={addNewChurch}>
           Cadastrar Igreja
@@ -46,6 +52,7 @@ const ListChurchComponent = () => {
                     <th>Estado:</th>
                     <th>Telefone:</th>
                     <th>E-mail:</th>
+                    <th>Ações:</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,7 +66,13 @@ const ListChurchComponent = () => {
                         <td>{church.bairro}</td>
                         <td>{church.state}</td>
                         <td>{church.phone}</td>
-                        <td>{church.email}</td>   
+                        <td>{church.email}</td>
+                        <td>
+                            <button 
+                            onClick={() => updateChurch(church._id)} className='btn btn-info'>
+                                Editar
+                            </button>
+                        </td>   
                     </tr>
                 ))}
             </tbody>
