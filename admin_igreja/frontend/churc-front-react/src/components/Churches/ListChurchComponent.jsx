@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getAllChurches } from '../../services/ChurchService';
+import { deleteChurch, getAllChurches } from '../../services/ChurchService';
 import { useNavigate } from 'react-router-dom';
 
 const ListChurchComponent = () => {
@@ -29,6 +29,16 @@ const ListChurchComponent = () => {
     //FUNÇÃO PARA EDITAR IGREJA(function updatChurch() )
     function updateChurch(id){
         navigator(`/edit-church/${id}`);
+    }
+
+    //FUNÇÃO PARA EXCLUIR IGREJA(removeChurch)
+    function removeChurch(id){
+        deleteChurch(id).then((response) =>{
+            console.log(response.data);
+            listofChurches();
+        }).catch((error) =>{
+            console.error(error);
+        });
     }
 
 
@@ -69,8 +79,12 @@ const ListChurchComponent = () => {
                         <td>{church.email}</td>
                         <td>
                             <button 
-                            onClick={() => updateChurch(church._id)} className='btn btn-info'>
+                            onClick={() => updateChurch(church._id)} className='btn btn-info text-light'>
                                 Editar
+                            </button>
+                            <button
+                            onClick={() => removeChurch(church._id)} className='btn bg-danger text-light'>
+                                Excluir
                             </button>
                         </td>   
                     </tr>
