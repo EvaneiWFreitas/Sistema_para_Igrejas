@@ -78,13 +78,9 @@ const ListChurchComponent = () => {
                         <td>{church.phone}</td>
                         <td>{church.email}</td>
                         <td>
-                            <button 
-                            onClick={() => updateChurch(church._id)} className='btn btn-info text-light'>
-                                Editar
+                            <button onClick={() => updateChurch(church._id)} className='btn btn-info btn-sm  text-light' style={{marginBottom: "2px"}}>Editar
                             </button>
-                            <button
-                            onClick={() => removeChurch(church._id)} className='btn bg-danger text-light'>
-                                Excluir
+                            <button onClick={() => removeChurch(church._id)} className='btn bg-danger btn-sm text-light'>Excluir
                             </button>
                         </td>   
                     </tr>
