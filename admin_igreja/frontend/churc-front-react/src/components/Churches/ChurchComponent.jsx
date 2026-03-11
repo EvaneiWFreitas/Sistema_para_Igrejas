@@ -265,7 +265,7 @@ const ChurchComponent = () => {
                         <div className='form-group mb-2'>
                             <label className='form-label'>Tipo:</label>
                             <select value={type} onChange={(e)=>setType(e.target.value)} className={`form-control ${errors.type ? "is-invalid":""}`} >
-                            <option>Escolha o tipo de Igreja</option>
+                            <option value="">Escolha o tipo de Igreja</option>
                             <option value="Igreja Filial">Igreja Filial</option>
                             <option value="Congregacao">Congregação</option>
                             <option value="Ponto Pregacao">Ponto de Pregação</option>
@@ -338,7 +338,7 @@ const ChurchComponent = () => {
                             <select value={state} 
                             onChange={(e)=>setState(e.target.value)}
                             className={`form-control ${errors.state ? "is-invalid":""}`} >
-                                <option>Selecione um estado</option>
+                                <option value="">Selecione um estado</option>
                                 <option value="AC">Acre</option>
                                 <option value="AL">Alagoas</option>
                                 <option value="AP">Amapá</option>

@@ -5,6 +5,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom"
 import IndexComponent from './components/IndexComponent'
 import ChurchComponent from './components/Churches/ChurchComponent'
 import ListMemberComponent from './components/Members/ListMemberComponent'
+import MemberComponent from './components/Members/MemberComponent'
 
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
 
           {/** "http://localhost:5173/members" */}
           <Route path='/members' element={<ListMemberComponent/>}></Route>
+          {/** http://localhost:5173/add-member */}
+          <Route path="/add-member" element={<MemberComponent/>}></Route>
 
         </Routes>
       </BrowserRouter>

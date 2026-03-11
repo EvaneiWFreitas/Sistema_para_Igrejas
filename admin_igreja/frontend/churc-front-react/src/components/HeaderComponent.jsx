@@ -15,6 +15,10 @@ const HeaderComponent = () => {
                                 <a className="nav-link active" aria-current="page" href="/churches">Igrejas</a>
                                 
                             </div>
+                            <div className="navbar-nav">
+                                <a className="nav-link active" aria-current="page" href="/members">Membros</a>
+                                
+                            </div>
                         </div>
                     </div>
             </nav>
